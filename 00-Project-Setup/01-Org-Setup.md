@@ -8,9 +8,9 @@ Salesforce environment used for the CPQ learning and implementation project.
 | Item | Details |
 |---|---|
 | Org Type | Developer Edition (signed up separately, not a Trailhead Playground) |
-| Org Name | TBD — Setup → Company Information → "Organization Name" |
-| Org ID | TBD — Setup → Company Information → "Salesforce Organization ID" (18-char ID) |
-| My Domain | TBD — Setup → Quick Find → "My Domain" → copy the domain shown (e.g. `yourdomain.develop.my.salesforce.com`) |
+| Org Name | ABC |
+| Org ID | 00Dbm00000wWWeN |
+| My Domain | orgfarm-b9568e2a8a-dev-ed.develop.my.salesforce.com  |
 | Environment | Development / Learning (non-production) |
 | Salesforce Edition | Developer Edition |
 | Currency | English (United States) - USD |
@@ -23,8 +23,8 @@ Salesforce environment used for the CPQ learning and implementation project.
 ## CPQ Package
 - [x] Salesforce CPQ package installed
 - [x] CPQ package version documented
-- [ ] CPQ permissions configured — **not confirmed, see Issue 1**
-- [ ] CPQ application accessible — **pending permission set fix**
+- [x] CPQ permissions configured — 
+- [x] CPQ application accessible — 
 - [ ] CPQ configuration verified — not yet started
 
 ### Package Information
@@ -71,15 +71,10 @@ Currently assigned to primary user (confirmed via screenshot):
 - Service Cloud User
 - (list may include more — not fully visible; recheck full list)
 
-**Missing:** No CPQ-specific permission set (e.g. "SBQQ User" /
+-CPQ-specific permission set (e.g. "SBQQ User" /
 "Salesforce CPQ User") confirmed as assigned. This needs to be located
 in Setup → Permission Sets and assigned before CPQ functionality can
 be reliably used.
-
-### Additional Permissions
-- TBD — once CPQ permission set is assigned, verify field-level access
-  to `SBQQ__Quote__c` and related objects if any issues arise.
-
 ---
 
 # 5. Initial CPQ Configuration
@@ -103,11 +98,11 @@ the implementation.
 Before starting the project, verify:
 
 - [x] Can access Salesforce
-- [ ] Can access CPQ functionality — blocked pending permission set
-- [ ] Can create products
-- [ ] Can create opportunities
-- [ ] Can create quotes
-- [ ] Can add products to quotes
+- [x] Can access CPQ functionality 
+- [x] Can create products
+- [x] Can create opportunities
+- [x] Can create quotes
+- [x] Can add products to quotes
 - [ ] Can calculate quote pricing
 
 ---
@@ -135,25 +130,25 @@ Document any issues encountered during setup.
 
 ## Issue 1
 ### Problem
-No CPQ-specific permission set (e.g. "SBQQ User") is confirmed as
+No CPQ-specific permission set (e.g. "SBQQ User") was confirmed as
 assigned to the primary user, even though the Salesforce CPQ package
-shows as Active/Installed.
+showed as Active/Installed.
 
 ### Root Cause
-TBD — likely the package installer does not auto-assign the
-CPQ-related permission set to all users; it usually must be manually
-located in Setup → Permission Sets and assigned.
+Installing the Salesforce CPQ managed package does not automatically
+assign its permission set to existing users — the permission set has
+to be located and assigned manually.
 
 ### Solution
-TBD — pending: locate the CPQ permission set in Setup → Permission
-Sets, assign it to the user, then verify the Quote tab/object becomes
-accessible via App Launcher.
+Located the SBQQ/CPQ permission set under Setup → Permission Sets,
+opened it, and assigned it to the primary user via Manage Assignments
+→ Add Assignment.
 
 ### Lesson Learned
 Package "Installed" and "Active" status only confirms the package
 exists in the org — it does not confirm the current user has
-permission to use its features. Permission sets must be checked
-separately.
+permission to use its features. Permission sets must always be
+checked and assigned separately after any managed package install.
 
 ---
 
