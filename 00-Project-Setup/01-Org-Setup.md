@@ -84,7 +84,7 @@ the implementation.
 - [ ] CPQ settings
 - [ ] Quote configuration
 - [ ] Product configuration
-- [ ] Price books — Standard Price Book existence/active status not yet confirmed
+- [x] Price books — Standard Price Book confirmed to exist and is Active
 - [x] Currency — confirmed USD
 - [ ] Tax configuration
 - [ ] Discount configuration
@@ -158,9 +158,9 @@ checked and assigned separately after any managed package install.
 | Salesforce Org | ✅ |
 | CPQ Package | ✅ |
 | Users | 🟡 (single user only so far) |
-| Permissions | ⬜ (CPQ permission set gap — see Issue 1) |
+| Permissions | ✅ |
 | CPQ Settings | ⬜ |
-| Price Book | ⬜ |
+| Price Book | ✅ |
 | Quote Configuration | ⬜ |
 | Org Validation | ⬜ |
 
