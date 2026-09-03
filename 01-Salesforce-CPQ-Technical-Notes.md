@@ -1,13 +1,5 @@
 Salesforce CPQ — Technical Notes
 
-37 Topics | Definitions + Simple Examples
-
-
-Running example: CloudNova Technologies sells CRM software to ABC Technologies.
-
-
-
-
 1. CPQ — Configure, Price, Quote
 
 Definition: Salesforce CPQ (Configure, Price, Quote) is a Salesforce solution used to configure the right products, calculate the correct price, and generate customer quotes.
