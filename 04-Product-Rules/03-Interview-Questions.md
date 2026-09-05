@@ -64,3 +64,27 @@ A: It captures the actual reasoning path — useful in interviews to
 demonstrate real troubleshooting skill, and useful for your own
 future reference so you don't repeat the same dead-end approach on a
 similar problem later.
+
+## Selection Rule Specific
+
+**Q: You've configured a Selection Rule's Action with Type = "Add,"
+correct conditions, and Evaluation Event = Always — but the action
+never fires. What's the most likely cause?**
+A: The Required checkbox on the Action record isn't checked. This is
+a documented CPQ quirk: "Add" is the only Action Type that requires
+Required = true to function; leaving it unchecked makes the action
+silently do nothing, even with everything else configured correctly.
+
+**Q: Why does a Selection Rule need a Product Action record, while a
+Validation Rule doesn't?**
+A: A Validation Rule only needs to check a condition and show an
+error — the Error Condition alone is sufficient. A Selection Rule
+needs to define what actually changes as a result, which is a
+separate instruction (the Action) beyond just checking a condition.
+
+**Q: Why is Evaluation Event typically set to 'Always' for Selection
+Rules rather than 'Save'?**
+A: Selection Rules are meant to react live as the customer configures
+the bundle — auto-selecting related options as choices are made, not
+only after the whole configuration is saved. 'Always' means it
+re-evaluates on load and on every edit.
