@@ -122,4 +122,74 @@ before the Error Condition ever checks it.
 - Configuration screen showing successful save with valid combination — captured (implied, confirm if you have it)
 
 ## Remaining Work For This Topic
-- [ ] Selection Rule: 3 Year Warranty auto-enables/selects Premium Support
+## Selection Rule Implementation
+
+### Business Requirement
+(Maps to Requirement #3 in `03-Project-Requirements.md`)
+If the customer selects 3 Year Warranty, Premium Support should
+automatically become selected.
+
+### Objects Involved (in addition to earlier ones)
+- `SBQQ__ProductAction__c` (defines what the rule actually does)
+
+### Configuration Steps Taken
+1. Created Summary Variable `3 Year Warranty Sum` (same pattern as
+   the Validation Rule's variables — sums Quantity filtered to
+   Product Code = TN-OPT-WARRANTY-3YR).
+2. Created Product Rule **"Select Premium Support with 3 Year Warranty"**:
+   - Type: Selection
+   - Conditions Met: All
+   - Scope: Product Options Only
+   - Evaluation Event: Always
+   - Message: left blank (Selection Rules don't block/error)
+3. Linked to Business Laptop via a Configuration Rule (same pattern
+   as before).
+4. Created an Error Condition: Tested Variable = `3 Year Warranty Sum`,
+   Operator = greater than, Filter Type = Value, Filter Value = 0.
+5. Created a Product Action: Type = **Add**, Product = Premium Support.
+
+### Issue Encountered
+Initial test failed silently — selecting 3 Year Warranty did not
+auto-select Premium Support, even with correct conditions and
+Evaluation Event = Always.
+
+### Root Cause
+Documented CPQ quirk: when a Product Action's Type is set to **"Add,"
+the Required checkbox on that Action record MUST be checked**, or the
+action does nothing at all. This isn't intuitive from the field name
+alone — "Required" here doesn't describe the target product's
+selection lock; it's what makes the "Add" action type actually
+execute.
+
+### Solution
+Checked the **Required** checkbox on the Product Action record.
+
+### Testing Steps
+1. Selected 3 Year Warranty on Business Laptop's configuration screen.
+2. Clicked **Apply Rules**.
+3. Observed Premium Support flip to selected in the Support section.
+
+### Expected Result
+Premium Support auto-selects when 3 Year Warranty is chosen.
+
+### Actual Result
+✅ Confirmed — after checking Required on the Action, clicking
+**Apply Rules** correctly triggers Premium Support to auto-select.
+Note: in this org's CPQ version, the "Always" evaluation event
+required an explicit "Apply Rules" click to visibly refresh the
+configuration screen, rather than firing instantly on radio button
+click.
+
+### Lessons Learned
+- The "Required" checkbox on a Product Action is not about locking
+  the option from being deselected — for "Add" type actions
+  specifically, it's a mandatory flag for the action to function at
+  all. This is a documented, known quirk, not intuitive from the UI.
+- "Apply Rules" is a legitimate manual trigger in this CPQ version
+  for reactive Selection Rules — worth checking for this button
+  before assuming a live-reactive rule is broken.
+
+## Final Status
+Both Validation Rule and Selection Rule implemented and tested
+successfully. Product Rules topic complete.
+<img width="959" height="474" alt="image" src="https://github.com/user-attachments/assets/5ead00c2-dd47-4081-ae79-24f23269b4e0" />
